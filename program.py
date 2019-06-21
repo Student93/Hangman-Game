@@ -32,8 +32,6 @@ def setGeneralOrder():
 			if tempChr in word:
 				generalOrder[i] = generalOrder[i] + 1
 
-
-
 	sortedListWithIndexes = sorted((k,j) for j,k in enumerate(generalOrder[:]))
 
 	for j in range(numLetters):
@@ -41,22 +39,18 @@ def setGeneralOrder():
 		generalOrder[numLetters - j - 1] = sortedListWithIndexes[j][1]
 
 	
-
-
 def makeDictionary():
 	global orderedDic
 	global firstGuess
 	for word in words:
 		lenWord = len(word)
 		orderedDic[lenWord-1].append(word)
-
-	
-
+		
 	for i in range(lenLargestWord):
 		tempDic = orderedDic[i-1][:]
 		tempOrdered = collections.defaultdict(int)
 		for word in tempDic:
-		
+			
 			for tempChr in word:
 				#i = ord(tempChr) - 97
 				tempOrdered[tempChr] = tempOrdered[tempChr] + 1
@@ -70,9 +64,6 @@ def makeDictionary():
 		else:
 			firstGuess[i] = firstGuess[i-1]
 		
-
-
-	
 
 
 def findGuessesByFrequency():
@@ -110,15 +101,12 @@ def findGuessesByFrequency():
 		else:
 			status.append(boardStatus[i][0])
 		i = i + 1
-
-
 	
 	status.append("$")
 	
 	patternReg = re.compile("".join(status))
 
 	dictionary = [word for word in dictionary if patternReg.match(word) is not None]
-	
 	
 	for word in dictionary:
 		#word = list(set(word))
@@ -128,8 +116,6 @@ def findGuessesByFrequency():
 
 	ordered = sorted(ordered.items(),key=lambda x:x[1])
 	
-
-
 	orderLen = len(ordered)
 
 	for i in range(orderLen-1,-1,-1):
@@ -141,8 +127,6 @@ def findGuessesByFrequency():
 		tempChr = chr(int(generalOrder[i] + 97))
 		if tempChr not in board and tempChr not in unMatchedLetters:
 			return tempChr
-
-
 
 
 
@@ -187,8 +171,6 @@ def guess(guessThis, input):
 						print "".join(board),missedGuesses
 						print "Sorry! missed it."
 					return 0
-
-
 
 	else:
 		# update dictionary according to length
@@ -279,14 +261,7 @@ def guess(guessThis, input):
 					return 0
 					
 								
-		
-
-
-		
-		
-
-
-
+				
 if __name__ == "__main__":
 	correctGuesses = 0
 	makeDictionary()
